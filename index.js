@@ -7,8 +7,7 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, {
             'Content-Type': 'text/html; charset=utf-8'
         });
-        
-        
+
         if (req.url === '/') {
             fs.readFile(
                 path.join(__dirname, 'views', 'index.html'),
@@ -33,19 +32,19 @@ const server = http.createServer((req, res) => {
                     res.end(content);
                 }
             );
-        }
-        
-        else if (req.url === '/shop') {
-            fs.readFile(
-                path.join(__dirname, 'views', 'shop.html'),
-                'utf-8',
-                (err, content) => {
-                    if (err) {
-                        throw err;
-                    }
-                    res.end(content);
-                }
-            );
+        } 
+
+        else if (req.url === '/api/users') {
+            res.writeHead(200, {
+                'Content-Type': 'text/json'  
+            });
+
+            const users = [
+                {name: 'Vasya', age: 20},
+                {name: 'Peva', age: 21}  
+            ];
+
+            res.end(JSON.stringify(users));
         }
     } else if (req.method === 'POST') {
         const body = [];
@@ -69,4 +68,3 @@ const server = http.createServer((req, res) => {
 server.listen(3000, () => {
     console.log('Server is running on port 3000...');
 });
-
