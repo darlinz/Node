@@ -1,5 +1,11 @@
-const obj = require("./user")
-console.log(obj.user)
-obj.sayHello()
-console.log("work dir", __dirname)
-console.log("file name", __filename)
+const http = require('http'); 
+const app = require('./App'); 
+
+const PORT = 3000; 
+
+
+const server = http.createServer(app);
+
+server.listen(PORT, () => {
+    console.log(`Сервер запущен на порту ${PORT}. Перейдите по адресу http://localhost:${PORT}`);
+});
